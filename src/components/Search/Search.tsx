@@ -5,6 +5,8 @@ type OwnProps = {
   query: string,
   setQuery: (e: string) => void
   fetchUsers: (query: string, page: number, pageSize: number, sort: string) => void
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   setCurrentPagination: ({page, pageSize}) => void,
   sort: string
 }

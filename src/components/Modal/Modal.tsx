@@ -11,7 +11,7 @@ interface IUserInfo {
   company: string;
   location: string;
   name: string;
-};
+}
 
 interface OwnProps {
   isActive: boolean
@@ -54,7 +54,9 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
   return (
     <div
       className={classNames(' cursor-pointer w-screen h-screen bg-[rgba(0,0,0,0.5)] fixed top-0 left-0 z-10 flex justify-center items-center', {'block': isActive}, {'hidden': !isActive})}
-      onClick={(e) => {
+      onClick={() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         setActive(false)
       }}
       data-testid={MODAL_TEST_IDS.CONTAINER}
@@ -72,7 +74,7 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
           /> : <div className='flex flex-col bg-[#2f2f2f] p-12 cursor-auto rounded-md relative items-center'
                     onClick={e => e.stopPropagation()}>
             <button className='absolute right-[10px] top-[10px] cursor-pointer'
-                    onClick={(e) => {
+                    onClick={() => {
                       setUserInfo({
                         login: '',
                         id: 0,
@@ -82,6 +84,8 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
                         location: '',
                         name: ''
                       })
+                      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                      // @ts-ignore
                       setActive(false)
                     }}
             >Закрыть

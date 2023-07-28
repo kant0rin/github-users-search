@@ -52,14 +52,19 @@ const GithubSearch: React.FC = () => {
         setError('Такой пользователь не найден')
       }
     } catch (e)  {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       if (e?.response?.status === 422) {
         setUsers({count: 0, users:[]})
         setIsLoading(false)
         setError('Такой пользователь не найден')
-      } else if (e?.response?.status === 403)  {
-        setUsers({count: 0, users:[]})
-        setIsLoading(false)
-        setError('Превышен лимит запросов по API')
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      } else { // @ts-ignore
+        if (e?.response?.status === 403)  {
+                setUsers({count: 0, users:[]})
+                setIsLoading(false)
+                setError('Превышен лимит запросов по API')
+              }
       }
     }
   }

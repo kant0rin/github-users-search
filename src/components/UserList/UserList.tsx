@@ -7,6 +7,8 @@ interface OwnProps{
   users: IUsers
   setSort: (e: string) => void
   fetchUsers: (query: string, page: number, pageSize: number, sort: string) => void
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   setCurrentPagination: ({page, pageSize}) => void
   query: string
   currentPagination: {page: number, pageSize: number},
