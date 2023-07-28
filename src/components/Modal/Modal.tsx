@@ -1,23 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import * as classNames from "classnames";
+import classNames from 'classnames';
 import {Circles} from "react-loader-spinner";
 
 interface IUserInfo {
-  login: string,
-  id: number,
-  html_url: string,
-  avatar_url: string
-  company: string,
-  location: string,
-  name: string
-}
+  login: string;
+  id: number;
+  html_url: string;
+  avatar_url: string;
+  company: string;
+  location: string;
+  name: string;
+};
 
 interface OwnProps {
   isActive: boolean
-  setActive: (e: boolean) => void,
-  currentUser: string
+  setActive?: (e: boolean) => void,
+  currentUser?: string
 }
+
+export const MODAL_TEST_IDS = {
+  LOGIN: 'user-login',
+  CONTAINER: 'modal-container',
+};
 
 const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
 
@@ -38,7 +43,7 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
     fetchUser(currentUser)
   }, [currentUser])
 
-  const fetchUser = async (login: string) => {
+  const fetchUser = async (login: string | undefined) => {
     setIsLoading(true)
     const response = await axios.get(`https://api.github.com/users/${login}`)
     const data = await response.data
@@ -52,6 +57,7 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
       onClick={(e) => {
         setActive(false)
       }}
+      data-testid={MODAL_TEST_IDS.CONTAINER}
     >
       {
         isLoading
@@ -81,7 +87,7 @@ const Modal: React.FC<OwnProps> = ({isActive, setActive, currentUser}) => {
             >Закрыть
             </button>
             <img src={userInfo.avatar_url + '.jpg'} alt="img" className='w-[200px] mb-4'/>
-            <h1 className='mb-4 text-xl'>Логин: {userInfo.login}</h1>
+            <h1 className='mb-4 text-xl' data-testid={MODAL_TEST_IDS.LOGIN} >Логин: {userInfo.login}</h1>
             <h2 className='text-xl mb-4'>ID: {userInfo.id}</h2>
             <h2 className='text-xl mb-4'>Имя: {userInfo.name}</h2>
             <h2 className='text-xl mb-4'>Компания: {userInfo.company}</h2>

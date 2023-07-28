@@ -9,6 +9,11 @@ type OwnProps = {
   sort: string
 }
 
+export const SEARCH_TEST_IDS = {
+  LOGIN: 'user-login',
+  CONTAINER: 'modal-container',
+};
+
 const Search: React.FC<OwnProps> = (
   {
     query,
